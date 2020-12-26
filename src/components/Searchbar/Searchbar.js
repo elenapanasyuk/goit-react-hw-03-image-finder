@@ -6,26 +6,27 @@ import s from './Searchbar.module.css';
 
 class Searchbar extends Component {
   state = {
-    imageName: '',
+    searchQuery: '',
   };
 
-  handleNameChange = event => {
-    this.setState({ imageName: event.currentTarget.value.toLowerCase() });
+  handleInputChange = event => {
+    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
   };
 
   handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.imageName.trim() === '') {
+    if (this.state.searchQuery.trim() === '') {
       toast.error('Please add search query');
       return;
     }
 
-    this.props.onSubmit(this.state.imageName);
-    this.setState({ imageName: '' });
+    this.props.onSubmit(this.state.searchQuery);
+    this.setState({ searchQuery: '' });
   };
 
   render() {
+    const { searchQuery } = this.state;
     return (
       <header className={s.header}>
         <form className={s.form} onSubmit={this.handleSubmit}>
@@ -36,11 +37,11 @@ class Searchbar extends Component {
           <input
             className={s.input}
             type="text"
-            autocomplete="off"
-            autofocus
+            autoComplete="off"
+            autoFocus
             placeholder="Search images and photos"
-            value={this.state.imageName}
-            onChange={this.handleNameChange}
+            value={searchQuery}
+            onChange={this.handleInputChange}
           />
         </form>
       </header>

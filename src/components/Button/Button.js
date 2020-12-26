@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import s from './Button.module.css';
 
-function Button({ onLoadMore }) {
+function Button({ onClick }) {
   return (
-    <button type="button" className={s.loadmorebtn} onClick={onLoadMore}>
-      Load More
-    </button>
+    <div className={s.btnContainer}>
+      <button type="button" className={s.loadmorebtn} onClick={onClick}>
+        Load More
+      </button>
+    </div>
   );
 }
 

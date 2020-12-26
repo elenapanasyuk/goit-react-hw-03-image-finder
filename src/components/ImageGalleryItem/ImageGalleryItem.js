@@ -1,25 +1,33 @@
 import PropTypes from 'prop-types';
 import s from './ImageGalleryItem.module.css';
 
-function ImageGalleryItem({ webformatURL, largeImageURL, tags, onOpenmodal }) {
+const ImageGalleryItem = ({ image, toggleModal }) => {
+  const onClick = () => {
+    toggleModal({
+      status: true,
+      src: image.largeImageURL,
+      alt: image.tags,
+    });
+  };
   return (
     <li className={s.item}>
       <img
-        src={webformatURL}
-        data-source={largeImageURL}
-        alt={tags}
+        src={image.webformatURL}
+        //data-source={largeImageURL}
+        alt={image.tags}
         className={s.image}
-        onClick={onOpenmodal}
+        onClick={onClick}
       />
     </li>
   );
-}
+};
 
 ImageGalleryItem.propTypes = {
-  webformatURL: PropTypes.string.isRequired,
-  largeImageURL: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
+  //webformatURL: PropTypes.string.isRequired,
+  //largeImageURL: PropTypes.string.isRequired,
+  //tags: PropTypes.string.isRequired,
+  //onClick: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default ImageGalleryItem;

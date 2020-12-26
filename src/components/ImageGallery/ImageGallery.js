@@ -2,25 +2,23 @@ import PropTypes from 'prop-types';
 import ImageGalleryItem from '../ImageGalleryItem';
 import s from './ImageGallery.module.css';
 
-function ImageGallery({ images, onOpenModal }) {
+const ImageGallery = ({ images, toggleModal }) => {
   return (
     <ul className={s.list}>
-      {images.map(({ id, webformatURL, largeImageURL, tags }) => (
+      {images.map(image => (
         <ImageGalleryItem
-          key={id}
-          webformatURL={webformatURL}
-          largeImageURL={largeImageURL}
-          tags={tags}
-          onOpenModal={onOpenModal}
+          key={image.id}
+          image={image}
+          toggleModal={toggleModal}
         />
       ))}
     </ul>
   );
-}
+};
 
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
-  onOpenModal: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default ImageGallery;
