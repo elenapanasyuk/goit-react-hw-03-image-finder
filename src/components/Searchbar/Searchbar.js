@@ -49,32 +49,10 @@ class Searchbar extends Component {
   }
 }
 
-// function Searchbar({ value, handleSubmit, handleChange }) {
-//   return (
-//     <header className={s.header}>
-//       <form className={s.form} onSubmit={handleSubmit}>
-//         <button type="submit" className={s.searchbutton}>
-//           <span className={s.label}>Search</span>
-//         </button>
-
-//         <input
-//           className={s.input}
-//           type="text"
-//           autocomplete="off"
-//           autofocus
-//           placeholder="Search images and photos"
-//           value={value}
-//           onChange={handleChange}
-//         />
-//       </form>
-//     </header>
-//   );
-// }
-
-// Searchbar.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   handleSubmit: PropTypes.func.isRequired,
-//   handleNameChange: PropTypes.func.isRequired,
-// };
+Searchbar.propTypes = {
+  value: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

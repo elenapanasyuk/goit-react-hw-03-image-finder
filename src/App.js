@@ -1,11 +1,12 @@
 import { Component } from 'react';
 import LoaderView from './components/Loader';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import fetchImage from './services/imagesApi';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
 import Modal from './components/Modal';
 import Button from './components/Button';
+import 'react-toastify/dist/ReactToastify.css';
 import s from './App.module.css';
 
 class App extends Component {
@@ -52,20 +53,18 @@ class App extends Component {
             this.setState(prevState => ({
               images: [...prevState.images, ...data.hits],
             }));
-            window.scrollTo({
-              top: document.documentElement.scrollHeight,
-              behavior: 'smooth',
-            });
+            this.onScrollPage();
           }
           this.onCheckButton();
         })
-        .catch(error => this.setState({ error }))
+        .catch(error =>
+          this.setState({ error: 'Smth went wrong:( please try again' }),
+        )
         .finally(() => this.setState({ isLoading: false }));
     } else {
       this.setState({
         images: [],
         showButton: false,
-        message: 'please add request', //notify: true,
       });
     }
   }
@@ -78,6 +77,15 @@ class App extends Component {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
+  onScrollPage = () => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.documentElement.clientHeight,
+        behavior: 'smooth',
+      });
+    }, 1200);
+  };
+
   onCheckButton = () => {
     const { totalHits, images } = this.state;
     if (totalHits > images.length) {
@@ -86,12 +94,8 @@ class App extends Component {
       this.setState({ showButton: false });
     }
     if (!totalHits) {
-      this.setState({
-        message: 'nothing ((( try again',
-        //notify: true
-      });
-    } else {
-      this.setState({ notify: false });
+      toast.error('No result:( try smth else');
+      return;
     }
   };
 
@@ -113,8 +117,6 @@ class App extends Component {
     const {
       images,
       isLoading,
-      error,
-      message,
       showModal,
       targetImage,
       showButton,

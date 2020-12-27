@@ -13,7 +13,6 @@ const ImageGalleryItem = ({ image, toggleModal }) => {
     <li className={s.item}>
       <img
         src={image.webformatURL}
-        //data-source={largeImageURL}
         alt={image.tags}
         className={s.image}
         onClick={onClick}
@@ -23,10 +22,10 @@ const ImageGalleryItem = ({ image, toggleModal }) => {
 };
 
 ImageGalleryItem.propTypes = {
-  //webformatURL: PropTypes.string.isRequired,
-  //largeImageURL: PropTypes.string.isRequired,
-  //tags: PropTypes.string.isRequired,
-  //onClick: PropTypes.func.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
 };
 
